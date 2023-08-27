@@ -16,7 +16,7 @@ let computer = [];
 
 const askPlayer = confirm("Bem-vinde ao jogo de Blackjack\nQuer iniciar uma nova rodada?");
 if (askPlayer) {
-
+//BOOLEAN TRUE STARTS GAME (DEAL CARDS) PUSH TO ARRAY
    let dealCards = true;
    while (dealCards) {
       player.push(comprarCarta());
@@ -34,7 +34,7 @@ if (askPlayer) {
       }
 
    }
-   //PLAYER HIT
+//PLAYER HIT
    let wantToHit = true;
    let typePlayer = " ";
    let scorePlayer = 0;
@@ -45,7 +45,7 @@ if (askPlayer) {
          typePlayer += iterator.texto
          scorePlayer += iterator.valor
       }
-      //OFFER HIT SECOND TIME IF SCORE IS UNDER 21 
+//HIT IF SCORE IS UNDER 21 
       if (scorePlayer > 21) {
          wantToHit = false
       } else {
@@ -59,7 +59,22 @@ if (askPlayer) {
          }
       }
    }
-   //LET COMPUTER HIT ANOTHER CARD IF UNDER 21
+//IF PLAYER SELECTS CANCEL AFTER 1 HIT I NEED THE CURRENT SCORE TO PRINT WHO WON
+   let playerScore = 0
+   let playerType = " "
+    for (let iterator of player) {
+       playerScore = playerScore + iterator.valor
+       playerType = playerType + iterator.texto
+   }
+
+   let computerScore = 0
+   let computerType = " "
+    for (let iterator of computer) {
+       computerScore = computerScore + iterator.valor
+       computerType = computerType + iterator.texto
+   }
+
+//LET COMPUTER HIT ANOTHER CARD IF SCORE IS UNDER 21
    let typeComputer = computer[0].texto + computer[1].texto;
    let scoreComputer = computer[0].valor + computer[1].valor;
    while (scoreComputer < scorePlayer && scorePlayer <= 21) {
@@ -70,7 +85,7 @@ if (askPlayer) {
          scoreComputer += iterator.valor
       }
    }
-   
+//IF STATEMENT TO TEST CONDITION (WHO WON)   
    if (scorePlayer <= 21 && scorePlayer > scoreComputer) {
       gameResults = "O usuário ganhou!"
       
@@ -84,7 +99,7 @@ if (askPlayer) {
 
    alert(`Suas cartas são ${typePlayer}. Sua pontuação é ${scorePlayer}.\nAs cartas do computador são ${typeComputer}. A pontuação do computador é ${scoreComputer}.\nResult: ${gameResults}`)
 
-   //THE FINAL ELSE STATEMENT CONNECTED TO 1ST IF STATEMENT (start game or end game) depending on player confirm
+//THE FINAL ELSE STATEMENT CONNECTED TO 1ST IF STATEMENT (start game or end game) depending on player confirm
    console.log(player, computer)
 } else {
    alert("O jogo acabou");
